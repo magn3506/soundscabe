@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundscabe</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <h1>Soundscabe</h1>
+
+    <div>
+        <h2>Baground noise</h2>
+        <hr/>
+        <p>forrest_bg</p>
+        <audio id="forest" controls loop>
+            <source src="./sound/wind.wav" type="audio/mpeg">
+        </audio>
+        <p>noise</p>
+        <audio  id="noise" controls loop>
+            <source src="./sound/Støj.wav" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <section>
+        <h2>Sounds of nature</h2>
+        <hr/>
+        <div>
+            <p>Birds</p>
+            <audio controls loop id="birds" >
+                <source src="./sound/birds.wav" type="audio/mpeg">
+            </audio>
+            <img id="bark" src="./images/bark.jpg" alt="bark">
+        </div>
+
+        <div>
+            <p>Frogs</p>
+            <audio controls loop id="frogs" >
+                <source src="./sound/frogs.mp3" type="audio/mpeg">
+            </audio>
+            <img id="bregne" src="./images/bregner.jpg" alt="bregne">
+        </div>
+
+        <div>
+            <p>Bees</p>
+            <audio controls loop id="bees">
+                <source  src="./sound/bees.flac" type="audio/mpeg">
+            </audio>
+            <img id="berries" src="./images/berries.jpg" alt="berries">
+
+        </div>
+
+        <div>
+            <p>ravens</p>
+            <audio controls loop id="ravens">
+                <source src="./sound/ravens.mp3" type="audio/mpeg">
+            </audio>
+            <img id="mos" src="./images/mos.jpg" alt="mos">
+
+        </div>
+
+        <div>
+            <p>Bunfire</p>
+            <audio controls loop id="bunfire">
+                <source src="./sound/bun_fire.mp3" type="audio/mpeg">
+            </audio>
+            <img id="grass" src="./images/grass.jpg" alt="grass">
+        </div>
+
+    </section>
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
