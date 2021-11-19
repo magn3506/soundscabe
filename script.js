@@ -25,70 +25,81 @@ const grass = document.querySelector("#grass");
 // EVENTLISTENERS 
 
 // WILL TRIGGER ON ENTER
-bark.addEventListener("mouseenter", introduceSound);
-bregne.addEventListener("mouseenter", introduceSound);
-bark.addEventListener("mouseenter", introduceSound);
-berries.addEventListener("mouseenter", introduceSound);
-mos.addEventListener("mouseenter", introduceSound);
-grass.addEventListener("mouseenter", introduceSound);
+bark.addEventListener("mouseenter", soundControl);
+bregne.addEventListener("mouseenter", soundControl);
+bark.addEventListener("mouseenter", soundControl);
+berries.addEventListener("mouseenter", soundControl);
+mos.addEventListener("mouseenter", soundControl);
+grass.addEventListener("mouseenter", soundControl);
 
 
 // WILL TRIGGER ON ENTER
-bark.addEventListener("mouseleave", fadeOutSound);
-bregne.addEventListener("mouseleave", fadeOutSound);
-bark.addEventListener("mouseleave", fadeOutSound);
-berries.addEventListener("mouseleave", fadeOutSound);
-mos.addEventListener("mouseleave", fadeOutSound);
-grass.addEventListener("mouseleave", fadeOutSound);
+bark.addEventListener("mouseleave", soundControl);
+bregne.addEventListener("mouseleave", soundControl);
+bark.addEventListener("mouseleave", soundControl);
+berries.addEventListener("mouseleave", soundControl);
+mos.addEventListener("mouseleave", soundControl);
+grass.addEventListener("mouseleave", soundControl);
 
 // MUSIC FUNCITONS
 
-let interval_1;
-let interval_2;
-
-function introduceSound (event) {
-
-    targetSoundId = event.target.previousElementSibling.id
-    targetSound = document.querySelector(`#${targetSoundId}`)
-    targetSound.volume = 0;
-    targetSound.play();
+function soundControl(event){
+    this.event = event
+    this.interval_1;
+    this.interval_2;
 
 
-    interval_1 = setInterval(() => {
-        console.log("WHAT")
-        console.log(targetSound.volume)
+    this.introduceSound = function (event) {
+        clearInterval(this.interval_1);
 
-        clearInterval(interval_2);
+        this.targetSoundId = event.target.previousElementSibling.id
+        this.targetSound = document.querySelector(`#${this.targetSoundId}`)
+        this.targetSound.volume = 0;
+        this.targetSound.play();
+    
+    
+        this.interval_1 = setInterval(() => {          
+    
+            clearInterval(this.interval_2);
+    
+            if (this.targetSound.volume >= 0.9) {
+                clearInterval(this.interval_1);
+                return;
+            }
+    
+            this.targetSound.volume += 0.005 ;
+    
+            }, 100)
+    
+    }
 
-        if (targetSound.volume >= 0.9) {
-            clearInterval(interval_1);
-            return;
-        }
+    this.fadeOutSound = function (event) {
+        this.targetSoundId = event.target.previousElementSibling.id
+        this.targetSound = document.querySelector(`#${this.targetSoundId}`)
+    
+        clearInterval(this.interval_1);
+    
+      this.interval_2 = setInterval(() => {
+          console.log("DOWN")
+    
+            if (this.targetSound.volume <= 0.05 || this.targetSound.volume <= 0) {
+                console.log("CLEEAR")
+                this.targetSound.volume = 0
+                clearInterval(this.interval_2);
+                return;
+            }
+    
+            this.targetSound.volume -= 0.005;
+    
+            }, 80)
+    }    
 
-        targetSound.volume += 0.005 ;
+    if(this.event.type === "mouseenter") {
+        this.introduceSound(this.event)
+    }
 
-        }, 100)
-
+    if(this.event.type === "mouseleave") {
+        this.fadeOutSound(this.event)
+    }
+    
 }
-
-function fadeOutSound (event) {
-
-    targetSoundId = event.target.previousElementSibling.id
-    targetSound = document.querySelector(`#${targetSoundId}`)
-
-    clearInterval(interval_1);
-
-  interval_2 = setInterval(() => {
-      console.log(targetSound.volume)
-
-        if (targetSound.volume <= 0.05 || targetSound == 0) {
-            console.log("CLEEAR")
-            targetSound.volume = 0
-            clearInterval(interval_2);
-            return;
-        }
-
-        targetSound.volume -= 0.005;
-
-        }, 80)
-}    
